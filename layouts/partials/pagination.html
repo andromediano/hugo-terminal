@@ -1,0 +1,75 @@
+{{ $pag := . }}
+{{ $currentPage := $pag.PageNumber }}
+{{ $totalPages := $pag.TotalPages }}
+{{ $maxVisible := 10 }}
+{{ $halfVisible := 4 }}
+
+<div class="flex items-center gap-1 font-mono text-xs">
+  {{ if $pag.HasPrev }}
+  <a href="{{ $pag.Prev.URL }}"
+     class="px-3 py-1.5 text-slate-400 bg-slate-800 border border-slate-700 rounded hover:border-primary-500/50 hover:text-primary-400 transition-colors">
+    &lt;prev
+  </a>
+  {{ end }}
+
+  <div class="flex items-center gap-1 mx-2">
+    {{ range $pag.Pagers }}
+      {{ $pageNum := .PageNumber }}
+
+      {{/* Always show first page */}}
+      {{ if eq $pageNum 1 }}
+        {{ if eq . $pag }}
+        <span class="px-3 py-1.5 text-primary-400 bg-primary-500/20 border border-primary-500/50 rounded">
+          {{ $pageNum }}
+        </span>
+        {{ else }}
+        <a href="{{ .URL }}"
+           class="px-3 py-1.5 text-slate-500 bg-slate-800/50 border border-slate-700/50 rounded hover:border-slate-600 hover:text-slate-300 transition-colors">
+          {{ $pageNum }}
+        </a>
+        {{ end }}
+
+      {{/* Show ellipsis after first page if needed */}}
+      {{ else if and (eq $pageNum 2) (gt (sub $currentPage $halfVisible) 2) }}
+        <span class="px-2 py-1.5 text-slate-600">...</span>
+
+      {{/* Always show last page */}}
+      {{ else if eq $pageNum $totalPages }}
+        {{/* Show ellipsis before last page if needed */}}
+        {{ if lt (add $currentPage $halfVisible) (sub $totalPages 1) }}
+        <span class="px-2 py-1.5 text-slate-600">...</span>
+        {{ end }}
+        {{ if eq . $pag }}
+        <span class="px-3 py-1.5 text-primary-400 bg-primary-500/20 border border-primary-500/50 rounded">
+          {{ $pageNum }}
+        </span>
+        {{ else }}
+        <a href="{{ .URL }}"
+           class="px-3 py-1.5 text-slate-500 bg-slate-800/50 border border-slate-700/50 rounded hover:border-slate-600 hover:text-slate-300 transition-colors">
+          {{ $pageNum }}
+        </a>
+        {{ end }}
+
+      {{/* Show pages around current page */}}
+      {{ else if and (ge $pageNum (sub $currentPage $halfVisible)) (le $pageNum (add $currentPage $halfVisible)) }}
+        {{ if eq . $pag }}
+        <span class="px-3 py-1.5 text-primary-400 bg-primary-500/20 border border-primary-500/50 rounded">
+          {{ $pageNum }}
+        </span>
+        {{ else }}
+        <a href="{{ .URL }}"
+           class="px-3 py-1.5 text-slate-500 bg-slate-800/50 border border-slate-700/50 rounded hover:border-slate-600 hover:text-slate-300 transition-colors">
+          {{ $pageNum }}
+        </a>
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  </div>
+
+  {{ if $pag.HasNext }}
+  <a href="{{ $pag.Next.URL }}"
+     class="px-3 py-1.5 text-slate-400 bg-slate-800 border border-slate-700 rounded hover:border-primary-500/50 hover:text-primary-400 transition-colors">
+    next&gt;
+  </a>
+  {{ end }}
+</div>

@@ -1,0 +1,42 @@
+<article class="article-card group">
+  <div class="flex flex-col gap-3">
+    <!-- Meta -->
+    <div class="flex flex-wrap items-center gap-2 text-xs text-slate-500">
+      {{ if .Draft }}
+      <span class="px-1.5 py-0.5 rounded bg-yellow-500/20 text-yellow-400 border border-yellow-500/30">
+        DRAFT
+      </span>
+      {{ end }}
+      <span class="text-slate-600">[</span>
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+      <span class="text-slate-600">]</span>
+      {{ if ne .PublishDate .Lastmod }}
+      <span class="text-slate-600">~</span>
+      <span class="text-slate-500">updated: {{ .Lastmod.Format "2006-01-02" }}</span>
+      {{ end }}
+    </div>
+
+    <!-- Title -->
+    <h3 class="text-base font-medium text-slate-200 group-hover:text-primary-400 transition-colors">
+      <a href="{{ .Permalink }}" class="flex items-start gap-2">
+        <span class="text-primary-500/70 text-sm mt-0.5">$</span>
+        <span>{{ .Title }}</span>
+      </a>
+    </h3>
+
+    <!-- Summary -->
+    <p class="text-sm text-slate-500 line-clamp-2 pl-5">{{ .Summary | truncate 120 }}</p>
+
+    <!-- Tags & Read time -->
+    <div class="flex items-center justify-between pl-5">
+      <div class="flex flex-wrap gap-1.5">
+        {{ with .Params.tags }}
+        {{ range first 3 . }}
+        <span class="tag tag-secondary text-[10px]">{{ . }}</span>
+        {{ end }}
+        {{ end }}
+      </div>
+      <span class="text-[10px] text-slate-600">{{ .ReadingTime }}min</span>
+    </div>
+  </div>
+</article>

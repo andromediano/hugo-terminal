@@ -1,0 +1,15 @@
+{
+  "name": "hugo-terminal",
+  "version": "1.0.0",
+  "description": "Hugo theme with TailwindCSS v4",
+  "scripts": {
+    "dev": "postcss assets/css/main.css -o static/css/main.css --watch",
+    "build": "postcss assets/css/main.css -o static/css/main.css --minify"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "tailwindcss": "^4.0.0",
+    "postcss": "^8.5.0",
+    "postcss-cli": "^11.0.0"
+  }
+}

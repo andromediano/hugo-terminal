@@ -1,0 +1,14 @@
+# theme.toml for hugo-terminal Hugo theme
+
+name = "hugo-terminal"
+license = "MIT"
+licenselink = "https://github.com/andromediano/hugo-terminal/blob/main/LICENSE"
+description = "A clean, modern blog theme with TailwindCSS"
+homepage = "https://github.com/andromediano/hugo-terminal"
+tags = ["blog", "clean", "minimal", "tailwindcss"]
+features = ["blog", "responsive", "dark-mode-ready"]
+min_version = "0.112.0"
+
+[author]
+  name = "andromediano"
+  homepage = "https://blog.andromediano.com"

@@ -1,0 +1,50 @@
+{{ define "main" }}
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+    <!-- Main Content -->
+    <div class="lg:col-span-3">
+      <!-- Hero Section -->
+      <section class="mb-10 terminal-card p-6">
+        <div class="terminal-dots">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="font-mono">
+          <p class="text-slate-500 text-sm mb-2">$ whoami</p>
+          <h1 class="text-2xl font-bold text-slate-100 mb-2">{{ .Site.Params.Author.name }}</h1>
+          <p class="text-slate-400 text-sm mb-4">{{ .Site.Params.description }}</p>
+          <p class="text-slate-500 text-sm">
+            <span class="text-primary-500">$</span> cat ./recent-posts.md
+          </p>
+        </div>
+      </section>
+
+      <!-- Recent Posts -->
+      <section>
+        <h2 class="text-lg font-semibold text-slate-300 mb-6 flex items-center gap-2">
+          <span class="text-primary-500">#</span> Recent Posts
+          <span class="text-slate-600 text-sm font-normal">// latest updates</span>
+        </h2>
+
+        <div class="space-y-4">
+          {{ $page := .Paginate (where .Site.RegularPages "Type" "in" .Site.Params.mainSections) }}
+          {{ range $page.Pages }}
+          {{ partial "article-card.html" . }}
+          {{ end }}
+        </div>
+
+        <!-- Pagination -->
+        {{ if gt $page.TotalPages 1 }}
+        <nav class="mt-10 flex justify-center">
+          {{ partial "pagination.html" $page }}
+        </nav>
+        {{ end }}
+      </section>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="lg:col-span-1">
+      {{ partial "sidebar.html" . }}
+    </aside>
+  </div>
+</div>
+{{ end }}

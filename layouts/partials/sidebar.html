@@ -1,0 +1,76 @@
+<div class="space-y-6">
+  <!-- Profile -->
+  <div class="terminal-card p-5">
+    <div class="terminal-dots">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="text-center">
+      <div
+        class="w-16 h-16 mx-auto mb-3 rounded-lg bg-slate-700 border border-slate-600 flex items-center justify-center text-2xl">
+        <span class="text-primary-500">&gt;_</span>
+      </div>
+      <h3 class="font-semibold text-slate-200 text-sm">{{ .Site.Params.Author.name }}</h3>
+      {{ with .Site.Params.Author.bio }}
+      <p class="text-xs text-slate-500 mt-1">{{ . }}</p>
+      {{ end }}
+    </div>
+  </div>
+
+  <!-- Series -->
+  {{ with .Site.Taxonomies.series }}
+  <div class="terminal-card p-5">
+    <h4 class="text-xs font-semibold text-slate-400 mb-3 uppercase tracking-wider">
+      <span class="text-primary-500">#</span> Series
+    </h4>
+    <ul class="space-y-1.0">
+      {{ range . }}
+      <li>
+        <a href="{{ .Page.Permalink }}"
+          class="flex items-center justify-between text-xs text-slate-500 hover:text-primary-400 transition-colors py-1">
+          <span class="truncate">{{ .Page.Title }}</span>
+          <span class="text-slate-600 bg-slate-800 px-1.5 py-0.5 rounded text-[10px]">{{ .Count }}</span>
+        </a>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+
+  <!-- Tags -->
+  {{ $tags := .Site.Taxonomies.tags.ByCount }}
+  {{ if $tags }}
+  <div class="terminal-card p-5">
+    <h4 class="text-xs font-semibold text-slate-400 mb-3 uppercase tracking-wider">
+      <span class="text-primary-500">#</span> Tags
+    </h4>
+    <div class="flex flex-wrap gap-1.5">
+      {{ range first 15 $tags }}
+      <a href="{{ .Page.Permalink }}" class="tag tag-primary text-[10px]">
+        {{ .Page.Title }}
+      </a>
+      {{ end }}
+    </div>
+  </div>
+  {{ end }}
+
+  <!-- Stats -->
+  <div class="terminal-card p-5">
+    <h4 class="text-xs font-semibold text-slate-400 mb-3 uppercase tracking-wider">
+      <span class="text-primary-500">#</span> Stats
+    </h4>
+    <div class="space-y-2 text-xs font-mono">
+      <div class="flex justify-between text-slate-500">
+        <span>posts:</span>
+        <span class="text-primary-400">{{ len (where .Site.RegularPages "Type" "posts") }}</span>
+      </div>
+      <div class="flex justify-between text-slate-500">
+        <span>tags:</span>
+        <span class="text-primary-400">{{ len .Site.Taxonomies.tags }}</span>
+      </div>
+      <div class="flex justify-between text-slate-500">
+        <span>series:</span>
+        <span class="text-primary-400">{{ len .Site.Taxonomies.series }}</span>
+      </div>
+    </div>
+  </div>
+</div>
