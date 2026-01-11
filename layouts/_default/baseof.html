@@ -11,5 +11,30 @@
     </main>
 
     {{- partial "footer.html" . -}}
+
+    <!-- Syntax Highlighting -->
+    <script src="/js/highlight.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Syntax highlighting
+      document.querySelectorAll('pre code').forEach(el => {
+        hljs.highlightElement(el);
+      });
+
+      // Copy button
+      document.querySelectorAll('pre').forEach(pre => {
+        const btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.textContent = 'Copy';
+        btn.onclick = () => {
+          const code = pre.querySelector('code');
+          navigator.clipboard.writeText(code ? code.textContent : pre.textContent);
+          btn.textContent = 'Copied!';
+          setTimeout(() => btn.textContent = 'Copy', 2000);
+        };
+        pre.appendChild(btn);
+      });
+    });
+    </script>
   </body>
 </html>

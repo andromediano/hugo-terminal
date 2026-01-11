@@ -4,7 +4,8 @@
   "description": "Hugo theme with TailwindCSS v4",
   "scripts": {
     "dev": "postcss assets/css/main.css -o static/css/main.css --watch",
-    "build": "postcss assets/css/main.css -o static/css/main.css --minify"
+    "download:hljs": "curl -sL https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js -o static/js/highlight.min.js && curl -sL https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/tokyo-night-dark.min.css -o static/css/hljs.css",
+    "build": "pnpm run download:hljs && postcss assets/css/main.css -o static/css/main.css --minify"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",

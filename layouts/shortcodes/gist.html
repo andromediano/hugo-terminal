@@ -1,0 +1,5 @@
+{{- $id := .Get 0 -}}
+{{- $file := .Get 1 -}}
+{{- $url := printf "https://gist.github.com/%s.js" $id -}}
+{{- with $file }}{{ $url = printf "%s?file=%s" $url . }}{{ end -}}
+<script src="{{ $url }}"></script>

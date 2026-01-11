@@ -46,12 +46,15 @@
     width: 8px;
     height: 8px;
   }
+
   ::-webkit-scrollbar-track {
     @apply bg-slate-800;
   }
+
   ::-webkit-scrollbar-thumb {
     @apply bg-slate-600 rounded;
   }
+
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-slate-500;
   }
@@ -59,6 +62,7 @@
 
 /* Component styles */
 @layer components {
+
   /* Terminal-style card - defined as plain CSS */
   .terminal-card {
     background-color: rgb(30 41 59 / 0.5);
@@ -73,18 +77,21 @@
     gap: 0.5rem;
     margin-bottom: 1rem;
   }
+
   .terminal-dots span:nth-child(1) {
     width: 0.75rem;
     height: 0.75rem;
     border-radius: 9999px;
     background-color: rgb(239 68 68 / 0.8);
   }
+
   .terminal-dots span:nth-child(2) {
     width: 0.75rem;
     height: 0.75rem;
     border-radius: 9999px;
     background-color: rgb(234 179 8 / 0.8);
   }
+
   .terminal-dots span:nth-child(3) {
     width: 0.75rem;
     height: 0.75rem;
@@ -101,6 +108,7 @@
     padding: 1.25rem;
     transition: all 0.3s ease-out;
   }
+
   .article-card:hover {
     border-color: rgb(34 197 94 / 0.5);
     box-shadow: 0 10px 15px -3px rgb(34 197 94 / 0.1);
@@ -117,19 +125,23 @@
     border-radius: 0.25rem;
     transition: background-color 0.2s;
   }
+
   .tag-primary {
     background-color: rgb(34 197 94 / 0.2);
     color: rgb(74 222 128);
     border: 1px solid rgb(34 197 94 / 0.3);
   }
+
   .tag-primary:hover {
     background-color: rgb(34 197 94 / 0.3);
   }
+
   .tag-secondary {
     background-color: rgb(51 65 85 / 0.5);
     color: rgb(148 163 184);
     border: 1px solid rgb(71 85 105 / 0.5);
   }
+
   .tag-secondary:hover {
     background-color: rgb(51 65 85);
   }
@@ -139,14 +151,17 @@
     padding-left: 0;
     list-style: none;
   }
+
   .toc-nav ul ul {
     padding-left: 1rem;
     margin-top: 0.25rem;
     border-left: 1px solid rgb(51 65 85);
   }
+
   .toc-nav li {
     margin-bottom: 0.25rem;
   }
+
   .toc-nav a {
     color: rgb(100 116 139);
     font-size: 0.875rem;
@@ -154,23 +169,49 @@
     text-decoration: none;
     transition: all 0.2s;
   }
+
   .toc-nav a:hover {
     color: rgb(74 222 128);
     padding-left: 0.25rem;
   }
 
-  /* Code block enhancements */
-  .highlight {
+  /* Code block enhancements (highlight.js) */
+  pre {
+    position: relative;
     border-radius: 0.5rem;
-    overflow: hidden;
     margin: 1rem 0;
+    padding: 1rem;
+    overflow-x: auto;
     border: 1px solid rgb(51 65 85 / 0.5);
   }
-  .highlight pre {
-    border-radius: 0.5rem;
-    margin: 0;
-    overflow-x: auto;
-    background-color: rgb(2 6 23) !important;
+
+  pre code.hljs {
+    padding: 0;
+    background: transparent;
+  }
+
+  /* Copy button */
+  .copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.25rem;
+    color: #94a3b8;
+    font-size: 0.75rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  pre:hover .copy-btn {
+    opacity: 1;
+  }
+
+  .copy-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
   }
 
   /* Prose styles for article content */
@@ -178,6 +219,7 @@
     color: rgb(203 213 225);
     line-height: 1.75;
   }
+
   .prose h1 {
     font-size: 1.5rem;
     font-weight: 700;
@@ -186,10 +228,12 @@
     color: rgb(241 245 249);
     font-family: var(--font-mono);
   }
+
   .prose h1::before {
     content: "# ";
     color: rgb(34 197 94);
   }
+
   .prose h2 {
     font-size: 1.25rem;
     font-weight: 700;
@@ -199,10 +243,12 @@
     scroll-margin-top: 5rem;
     font-family: var(--font-mono);
   }
+
   .prose h2::before {
     content: "## ";
     color: rgb(34 197 94);
   }
+
   .prose h3 {
     font-size: 1.125rem;
     font-weight: 600;
@@ -212,10 +258,12 @@
     scroll-margin-top: 5rem;
     font-family: var(--font-mono);
   }
+
   .prose h3::before {
     content: "### ";
     color: rgb(34 197 94 / 0.7);
   }
+
   .prose h4 {
     font-size: 1rem;
     font-weight: 600;
@@ -224,41 +272,51 @@
     color: rgb(226 232 240);
     scroll-margin-top: 5rem;
   }
+
   .prose p {
     margin: 1rem 0;
   }
+
   .prose a {
     color: rgb(74 222 128);
     text-decoration: none;
   }
+
   .prose a:hover {
     text-decoration: underline;
     color: rgb(134 239 172);
   }
+
   .prose strong {
     font-weight: 600;
     color: rgb(241 245 249);
   }
+
   .prose ul {
     margin: 1rem 0;
     padding-left: 1.5rem;
     list-style: none;
   }
+
   .prose ul li::before {
     content: "- ";
     color: rgb(34 197 94);
   }
+
   .prose ol {
     margin: 1rem 0;
     padding-left: 1.5rem;
     list-style: decimal;
   }
+
   .prose ol li::marker {
     color: rgb(34 197 94);
   }
+
   .prose li {
     margin: 0.25rem 0;
   }
+
   .prose blockquote {
     margin: 1rem 0;
     padding: 0.5rem 1rem;
@@ -268,6 +326,7 @@
     background-color: rgb(30 41 59 / 0.3);
     border-radius: 0 0.25rem 0.25rem 0;
   }
+
   .prose code {
     background-color: rgb(30 41 59);
     padding: 0.125rem 0.375rem;
@@ -277,27 +336,31 @@
     color: rgb(74 222 128);
     border: 1px solid rgb(51 65 85 / 0.5);
   }
+
   .prose pre {
     margin: 1rem 0;
-    padding: 1rem;
+    padding: 0.2rem;
     background-color: rgb(2 6 23);
     color: rgb(203 213 225);
     border-radius: 0.5rem;
     overflow-x: auto;
     border: 1px solid rgb(30 41 59);
   }
+
   .prose pre code {
     background-color: transparent;
     padding: 0;
     color: inherit;
     border: none;
   }
+
   .prose img {
     margin: 1rem 0;
     border-radius: 0.5rem;
     max-width: 100%;
     border: 1px solid rgb(51 65 85 / 0.5);
   }
+
   .prose table {
     margin: 1rem 0;
     width: 100%;
@@ -305,6 +368,7 @@
     font-family: var(--font-mono);
     font-size: 0.875rem;
   }
+
   .prose th {
     border: 1px solid rgb(51 65 85);
     background-color: rgb(30 41 59);
@@ -313,11 +377,13 @@
     font-weight: 600;
     color: rgb(226 232 240);
   }
+
   .prose td {
     border: 1px solid rgb(51 65 85);
     padding: 0.5rem 1rem;
     background-color: rgb(30 41 59 / 0.5);
   }
+
   .prose hr {
     margin: 2rem 0;
     border-color: rgb(51 65 85);
@@ -326,6 +392,7 @@
 
 /* Utility styles */
 @layer utilities {
+
   /* Sticky sidebar */
   .sticky-toc {
     position: sticky;
